@@ -9,9 +9,13 @@ By supervised fine-tuning on these curated data entries, LLMs can invoke externa
 The experimental results indicate that LLMs trained on ToolBridge demonstrate consistent performance improvements on both standard benchmarks and custom evaluation datasets. 
 All the associated code and data will be open-source at this repository, promoting transparency and facilitating the broader community to explore approaches for equipping LLMs with external tools capabilities.
 
-[Overview of Construction Pipeline](./toolbridge/overview.pdf)
+#### Overview of Construction Pipeline
 
-[Examples from ToolBridge](./toolbridge/datasamples.pdf)
+![img](./toolbridge/overview.jpg)
+
+#### Data Examples from ToolBridge
+
+![img](./toolbridge/datasamples.jpg)
 
 
 # ToolBridge Construct Pipeline
