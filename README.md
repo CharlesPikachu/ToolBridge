@@ -1,13 +1,14 @@
 # ToolBridge: An Open-Source Dataset to Equip LLMs with External Tool Capabilities
 
-Through the integration of external tools, large language models (LLMs) such as GPT-4o and Llama 3.1 significantly expand their functional capabilities, evolving from elementary conversational agents to general-purpose assistants. 
-We argue that the primary drivers of these advancements are the quality and diversity of the training data. 
-However, the existing LLMs with external tool integration provide only limited transparency regarding their datasets and data collection methods, which has led to the initiation of this research. 
-Specifically, in this paper, our objective is to elucidate the detailed process involved in constructing datasets that empower LLMs to effectively learn how to utilize external tools and make this information available to the public through the introduction of ToolBridge. 
-ToolBridge proposes to employ a collection of general open-access datasets as its raw dataset pool and applies a series of strategies to identify appropriate data entries from the pool for external tool API insertions. 
-By supervised fine-tuning on these curated data entries, LLMs can invoke external tools in appropriate contexts to boost their predictive accuracy, particularly for basic functions including data processing, numerical computation, and factual retrieval. Our experiments rigorously isolates model architectures and training configurations, focusing exclusively on the role of data. 
-The experimental results indicate that LLMs trained on ToolBridge demonstrate consistent performance improvements on both standard benchmarks and custom evaluation datasets. 
-All the associated code and data will be open-source at this repository, promoting transparency and facilitating the broader community to explore approaches for equipping LLMs with external tools capabilities.
+Through the incorporation of external tools, large language models (LLMs), exemplified by GPT-4o and Llama 3.1, materially expand their functional capabilities, evolving from rudimentary dialogue systems to versatile general-purpose AI assistants. 
+We propose that the foremost contributors to these advancements are the richness and heterogeneity of the training data. 
+However, the existing LLMs with external tool integration provide only limited transparency pertaining to their datasets and data curation methodologies, motivating the initiation of this study. 
+Specifically, this paper endeavors to present a detailed exposition of the methodology for constructing data entries that facilitate LLMs in effectively learning how to utilize external tools and disseminate this process to the public through the introduction of ToolBridge. 
+ToolBridge seeks to harness a collection of open-source datasets as its raw dataset pool and then incorporates a series of strategies to determine appropriate data entries, upon which external tool insertions are executed. 
+By supervised fine-tuning (SFT) on these curated entries, LLMs can develop proficiency in invoking external tools in appropriate contexts to improve their predictive accuracy, particularly for essential functions including numerical computation, data processing and factual retrieval. 
+Our experiments rigorously isolate model architectures and training configurations, zeroing in exclusively on the role of data. 
+The experimental results demonstrate that LLMs trained on ToolBridge consistently achieve superior performance across standard and custom evaluation datasets. 
+To reinforce transparency, we will publicly release all associated code and data as open source, facilitating research on equipping LLMs with external tool capabilities.
 
 #### Overview of Construction Pipeline
 
@@ -23,9 +24,36 @@ All the associated code and data will be open-source at this repository, promoti
 Coming Soon
 
 
-# Load Dataset
+# Download Dataset
 
-Coming Soon
+#### Download from Github
+
+Download ToolBridge datasets,
+
+```sh
+wget https://github.com/CharlesPikachu/ToolBridge/releases/download/datasets/toolbridge_178k.pkl
+```
+
+Load with Python,
+
+```python
+import pickle
+
+data = pickle.load(open('toolbridge_178k.pkl', 'rb'))
+print(data[0])
+```
+
+Then, you can see,
+
+```python
+{'original': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}, 'inserted': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n<python>total_apples = 24\nnum_deer = 3\napples_per_deer = total_apples // num_deer\nprint(apples_per_deer)</python>\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}, 'insertedwithresults': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n<python>total_apples = 24\nnum_deer = 3\napples_per_deer = total_apples // num_deer\nprint(apples_per_deer)</python><result>8</result>\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}}
+```
+
+where,
+
+- original: Data entries from public sources.
+- inserted: Data entries with special characters `<python>` and `</python>`.
+- insertedwithresults: Data entries with special characters, `<python>`, `</python>`, `<result>` and `</result>`.
 
 
 # Citation
