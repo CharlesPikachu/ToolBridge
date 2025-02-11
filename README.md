@@ -26,6 +26,29 @@ Coming Soon
 
 # Download Dataset
 
+#### Download from HuggingFace
+
+Load with Python,
+
+```python
+from datasets import load_dataset
+
+dataset = load_dataset("BLWX/ToolBridge")
+print(dataset['train'][0])
+```
+
+Then, you can see,
+
+```python
+{'original': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}, 'inserted': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n<python>total_apples = 24\nnum_deer = 3\napples_per_deer = total_apples // num_deer\nprint(apples_per_deer)</python>\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}, 'insertedwithresults': {'messages': [{'role': 'user', 'content': '题目：\n鹿妈妈买了24个苹果，她想平均分给她的3只小鹿吃，每只小鹿可以分到几个苹果？'}, {'role': 'assistant', 'content': '鹿妈妈买了24个苹果，平均分给3只小鹿吃，那么每只小鹿可以分到的苹果数就是总苹果数除以小鹿的只数。\n<python>total_apples = 24\nnum_deer = 3\napples_per_deer = total_apples // num_deer\nprint(apples_per_deer)</python><result>8</result>\n24÷3=8\n每只小鹿可以分到8个苹果。所以，答案是每只小鹿可以分到8个苹果。'}]}}
+```
+
+where,
+
+- original: Data entries from public sources.
+- inserted: Data entries with special characters `<python>` and `</python>`.
+- insertedwithresults: Data entries with special characters `<python>`, `</python>`, `<result>` and `</result>`.
+
 #### Download from Github
 
 Download ToolBridge datasets,
@@ -53,7 +76,7 @@ where,
 
 - original: Data entries from public sources.
 - inserted: Data entries with special characters `<python>` and `</python>`.
-- insertedwithresults: Data entries with special characters, `<python>`, `</python>`, `<result>` and `</result>`.
+- insertedwithresults: Data entries with special characters `<python>`, `</python>`, `<result>` and `</result>`.
 
 
 # Citation
